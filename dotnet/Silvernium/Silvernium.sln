@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silvernium", "Silvernium\Silvernium.csproj", "{7BA20B30-4F17-4FBE-ABD2-6E608D54DBA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E6973493-647B-422C-8B87-87E0CA5961C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{5501E442-6C72-4052-907F-206EFF41B5C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BA20B30-4F17-4FBE-ABD2-6E608D54DBA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA20B30-4F17-4FBE-ABD2-6E608D54DBA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA20B30-4F17-4FBE-ABD2-6E608D54DBA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA20B30-4F17-4FBE-ABD2-6E608D54DBA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6973493-647B-422C-8B87-87E0CA5961C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6973493-647B-422C-8B87-87E0CA5961C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6973493-647B-422C-8B87-87E0CA5961C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6973493-647B-422C-8B87-87E0CA5961C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5501E442-6C72-4052-907F-206EFF41B5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5501E442-6C72-4052-907F-206EFF41B5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5501E442-6C72-4052-907F-206EFF41B5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5501E442-6C72-4052-907F-206EFF41B5C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
