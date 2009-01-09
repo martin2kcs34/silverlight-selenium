@@ -87,6 +87,26 @@ namespace ThoughtWorks.Selenium.Silvernium
             return silverLightJSStringPrefix + "content." + scriptKey + functionName + "(" + functionArgs + ");";
         }
 
+        public String jsForContentMethod(String functionName, params string[] parameters)
+        {
+            string functionArgs = "";
+            if (parameters.Count() > 0)
+            {
+                for (int i=0; i<parameters.Count(); i++)
+                {
+                    functionArgs = functionArgs + "'" + parameters[i] + "',";
+                }
+                //remove last comma
+                functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
+            }
+            return silverLightJSStringPrefix + "content." + functionName + "(" + functionArgs + ");";
+        }
+
+        private string jsForContentProperty(string propertyName)
+        {
+            return silverLightJSStringPrefix + "content." + propertyName + ";";
+        }
+
         public void Start()
         {
             selenium.Start();
@@ -100,6 +120,37 @@ namespace ThoughtWorks.Selenium.Silvernium
         public void Open(string url)
         {
             selenium.Open(url);
+        }
+
+        public string DirectMethod(string functionName, params string[] parameters)
+        {
+            return selenium.GetEval(jsForDirectMethod(functionName, parameters));
+        }
+
+        public string ContentMethod(string functionName, params string[] parameters)
+        {
+            return selenium.GetEval(jsForContentMethod(functionName, parameters));
+        }
+
+        private string ContentProperty(string propertyName)
+        {
+            return selenium.GetEval(jsForContentProperty(propertyName));
+        }
+
+        //Silverlight Methods
+        public bool IsVersionSupported(string versionString)
+        {
+            return Convert.ToBoolean(DirectMethod("isVersionSupported", versionString));
+        }
+
+        public int ActualHeight()
+        {
+            return Convert.ToInt32(ContentProperty("actualHeight"));
+        }
+
+        public int ActualWidth()
+        {
+            return Convert.ToInt32(ContentProperty("actualWidth"));
         }
     }
 }

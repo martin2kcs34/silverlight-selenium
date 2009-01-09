@@ -82,6 +82,30 @@ namespace UnitTests
             Assert.AreEqual("window.document['Test'].content.Key.Func3('42','24');",
                             silvernium.jsForContentScriptMethod("Func3", new[] {"42", "24"}));
         }
+        
+        [Test]
+        public void ShouldReturnJSFunctionForContentMethodForFF2()
+        {
+            mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
+            silvernium = new Silvernium(selenium, "Test", "Key");
+            Assert.AreEqual("document['Test'].content.Func1();", silvernium.jsForContentMethod("Func1"));
+            Assert.AreEqual("document['Test'].content.Func2('42');",
+                            silvernium.jsForContentMethod("Func2", "42"));
+            Assert.AreEqual("document['Test'].content.Func3('42','24');",
+                            silvernium.jsForContentMethod("Func3", new[] { "42", "24" }));
+        }
+
+        [Test]
+        public void ShouldReturnJSFunctionForContentMethodForFF3()
+        {
+            mockProcessor.ExpectAndReturn("GetEval", "Firefox/3.0.0.1", "navigator.userAgent");
+            silvernium = new Silvernium(selenium, "Test", "Key");
+            Assert.AreEqual("window.document['Test'].content.Func1();", silvernium.jsForContentMethod("Func1"));
+            Assert.AreEqual("window.document['Test'].content.Func2('42');",
+                            silvernium.jsForContentMethod("Func2", "42"));
+            Assert.AreEqual("window.document['Test'].content.Func3('42','24');",
+                            silvernium.jsForContentMethod("Func3", new[] { "42", "24" }));
+        }
 
         [Test]
         public void ShouldReturnWindowDocumentJSPrefixForFF3()
