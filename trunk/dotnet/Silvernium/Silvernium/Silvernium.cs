@@ -107,6 +107,16 @@ namespace ThoughtWorks.Selenium.Silvernium
             return silverLightJSStringPrefix + "content." + propertyName + ";";
         }
 
+        private string jsForDirectProperty(String propertyName)
+        {
+            return silverLightJSStringPrefix + propertyName + ";";
+        }
+
+        private string jsForSettingsProperty(String propertyName)
+        {
+            return silverLightJSStringPrefix + "settings." + propertyName + ";";
+        }
+
         public void Start()
         {
             selenium.Start();
@@ -137,6 +147,16 @@ namespace ThoughtWorks.Selenium.Silvernium
             return selenium.GetEval(jsForContentProperty(propertyName));
         }
 
+        private String DirectProperty(String propertyName)
+        {
+            return selenium.GetEval(jsForDirectProperty(propertyName));
+        }
+
+        private string SettingsProperty(String propertyName)
+        {
+            return selenium.GetEval(jsForSettingsProperty(propertyName));
+        }
+
         //Silverlight Methods
         public bool IsVersionSupported(string versionString)
         {
@@ -152,5 +172,75 @@ namespace ThoughtWorks.Selenium.Silvernium
         {
             return Convert.ToInt32(ContentProperty("actualWidth"));
         }
+
+        public string Accessibility()
+        {
+            return ContentProperty("accessibility");
+        }
+
+        public void CreateFromXAML(string xamlContent, string namescope)
+        {
+            ContentMethod("createFromXaml", xamlContent, namescope);
+        }
+
+        public string FindName(string objectName)
+        {
+            return ContentMethod("findName", objectName);
+        }
+
+        public bool FullScreen()
+        {
+            return Convert.ToBoolean(ContentProperty("fullScreen"));
+        }
+
+        public String InitParams()
+        {
+            return DirectProperty("initParams");
+        }
+
+        public bool IsLoaded()
+        {
+            return Convert.ToBoolean(DirectProperty("isLoaded"));
+        }
+
+        public String Root()
+        {
+            return DirectProperty("root");
+        }
+
+        public string Background()
+        {
+            return SettingsProperty("background");
+        }
+
+        public bool EnabledFrameRateCounter()
+        {
+            return Convert.ToBoolean(SettingsProperty("enabledFramerateCounter"));
+        }
+
+        public bool EnableRedrawRegions()
+        {
+            return Convert.ToBoolean(SettingsProperty("enableRedrawRegions"));
+        }
+
+        public bool EnableHtmlAccess()
+        {
+            return Convert.ToBoolean(SettingsProperty("enableHtmlAccess"));
+        }
+
+        public int MaxFrameRate()
+        {
+            return Convert.ToInt32(SettingsProperty("maxFrameRate"));
+        }
+
+        public bool WindowLess()
+        {
+            return Convert.ToBoolean(SettingsProperty("windowless"));
+        }
+
+        public string Source()
+        {
+            return DirectProperty("source");
+        }	
     }
 }
