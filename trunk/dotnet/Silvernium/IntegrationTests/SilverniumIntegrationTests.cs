@@ -7,10 +7,8 @@ namespace IntegrationTests
     [TestFixture]
     public class SilverniumIntegrationTests
     {
-
         private ISelenium selenium;
         private Silvernium silvernium;
-
 
         [SetUp]
         public void SetUp()
@@ -30,7 +28,7 @@ namespace IntegrationTests
         [Test]
         public void ShouldSpawnBrowserOnSeleniumAndFetchSilverLightJSStringPreixForMSIE()
         {
-            Assert.AreEqual("window.document['Test'].",silvernium.SilverLightJSStringPrefix);
+            Assert.AreEqual("window.document['Test'].", silvernium.SilverLightJSStringPrefix);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ThoughtWorks.Selenium.Silvernium
     {
         private readonly string scriptKey = "";
         private readonly ISelenium selenium;
-        private readonly String silverLightJSStringPrefix;
+        private readonly string silverLightJSStringPrefix;
 
         public Silvernium(ISelenium selenium, string silverlightObjectId, string scriptKey)
         {
@@ -38,7 +38,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             {
                 return createJSPrefixWindowDocument(silverlightObjectId);
             }
-            else if (appName.Contains(BrowserConstants.FIREFOX2))
+            if (appName.Contains(BrowserConstants.FIREFOX2))
             {
                 return createJSPrefixDocument(silverlightObjectId);
             }
@@ -55,12 +55,11 @@ namespace ThoughtWorks.Selenium.Silvernium
             return "document['" + silverlightObjectId + "'].";
         }
 
-        public String jsForDirectMethod(String functionName, params string[] parameters)
+        public string jsForDirectMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
             if (parameters.Count() > 0)
             {
-                ;
                 for (int i = 0; i < parameters.Count(); i++)
                 {
                     functionArgs = functionArgs + "'" + parameters[i] + "',";
@@ -71,12 +70,11 @@ namespace ThoughtWorks.Selenium.Silvernium
             return silverLightJSStringPrefix + functionName + "(" + functionArgs + ");";
         }
 
-        public String jsForContentScriptMethod(String functionName, params string[] parameters)
+        public string jsForContentScriptMethod(string functionName, params string[] parameters)
         {
-            String functionArgs = "";
+            string functionArgs = "";
             if (parameters.Count() > 0)
             {
-                ;
                 for (int i = 0; i < parameters.Count(); i++)
                 {
                     functionArgs = functionArgs + "'" + parameters[i] + "',";
@@ -87,7 +85,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             return silverLightJSStringPrefix + "content." + scriptKey + functionName + "(" + functionArgs + ");";
         }
 
-        public String jsForContentMethod(String functionName, params string[] parameters)
+        public string jsForContentMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
             if (parameters.Count() > 0)
@@ -107,14 +105,24 @@ namespace ThoughtWorks.Selenium.Silvernium
             return silverLightJSStringPrefix + "content." + propertyName + ";";
         }
 
-        private string jsForDirectProperty(String propertyName)
+        private string jsForDirectProperty(string propertyName)
         {
             return silverLightJSStringPrefix + propertyName + ";";
         }
 
-        private string jsForSettingsProperty(String propertyName)
+        private string jsForSettingsProperty(string propertyName)
         {
             return silverLightJSStringPrefix + "settings." + propertyName + ";";
+        }
+
+        private string jsForContentScriptGetProperty(string propertyName)
+        {
+            return silverLightJSStringPrefix + "content." + scriptKey + propertyName + ";";
+        }
+
+        private string jsForContentScriptSetProperty(string propertyName, string parameters)
+        {
+            return silverLightJSStringPrefix + "content." + scriptKey + propertyName + "='" + parameters + "';";
         }
 
         public void Start()
@@ -147,14 +155,29 @@ namespace ThoughtWorks.Selenium.Silvernium
             return selenium.GetEval(jsForContentProperty(propertyName));
         }
 
-        private String DirectProperty(String propertyName)
+        private string DirectProperty(string propertyName)
         {
             return selenium.GetEval(jsForDirectProperty(propertyName));
         }
 
-        private string SettingsProperty(String propertyName)
+        private string SettingsProperty(string propertyName)
         {
             return selenium.GetEval(jsForSettingsProperty(propertyName));
+        }
+
+        public string GetPropertyValue(string propertyName)
+        {
+            return selenium.GetEval(jsForContentScriptGetProperty(propertyName));
+        }
+
+        public string SetPropertyValue(string propertyName, string parameters)
+        {
+            return selenium.GetEval(jsForContentScriptSetProperty(propertyName, parameters));
+        }
+
+        public string Call(string functionName, params string[] parameters)
+        {
+            return selenium.GetEval(jsForContentScriptMethod(functionName, parameters));
         }
 
         //Silverlight Methods
@@ -193,7 +216,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             return Convert.ToBoolean(ContentProperty("fullScreen"));
         }
 
-        public String InitParams()
+        public string InitParams()
         {
             return DirectProperty("initParams");
         }
@@ -203,7 +226,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             return Convert.ToBoolean(DirectProperty("isLoaded"));
         }
 
-        public String Root()
+        public string Root()
         {
             return DirectProperty("root");
         }
