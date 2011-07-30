@@ -34,7 +34,8 @@ namespace ThoughtWorks.Selenium.Silvernium
         private string GetSilverLightJSStringPrefix(string silverlightObjectId)
         {
             string appName = selenium.GetEval("navigator.userAgent");
-            if (appName.Contains(BrowserConstants.FIREFOX3) || appName.Contains(BrowserConstants.IE))
+            if (appName.Contains(BrowserConstants.FIREFOX5) || appName.Contains(BrowserConstants.FIREFOX4)
+                || appName.Contains(BrowserConstants.FIREFOX3) || appName.Contains(BrowserConstants.IE))
             {
                 return createJSPrefixWindowDocument(silverlightObjectId);
             }
