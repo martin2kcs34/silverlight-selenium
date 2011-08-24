@@ -69,8 +69,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPageFixture.xaml.cs">
-      <DependentUpon>MainPageFixture.xaml</DependentUpon>
+    <Compile Include="SilverlightFixture.xaml.cs">
+      <DependentUpon>SilverlightFixture.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -83,7 +83,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </ApplicationDefinition>
-    <Page Include="MainPageFixture.xaml">
+    <Page Include="SilverlightFixture.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
