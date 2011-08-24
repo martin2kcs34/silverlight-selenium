@@ -29,7 +29,7 @@ namespace ReferenceApplication
         {
             if (e.InitParams.ContainsKey("testMode") && Boolean.Parse(e.InitParams["testMode"]))
             {
-                this.RootVisual = new MainPageFixture();
+                this.RootVisual = new SilverlightFixture();
             }
             else
             {
