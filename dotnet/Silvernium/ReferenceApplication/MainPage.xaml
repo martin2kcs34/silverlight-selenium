@@ -11,14 +11,26 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         
         <TextBlock Name="textBlock"  Text="This is a TextBlock" Grid.Row="0"/>
         <TextBox Name="textBox" Text="This is a TextBox" Grid.Row="1"/>
         <TextBox Name="disabledTextBox" Text="This is a disabled TextBox" IsReadOnly="True" Grid.Row="2"/>
         <CheckBox Name="checkBox" Content="This is a CheckBox" Grid.Row="3"/>
-        <RadioButton Name="radioButtonILike" Content="I like RadioButton" GroupName="RadioGroup" Grid.Row="4"/>
+        <RadioButton Name="radioButtonILike" Content="I like RadioButton" IsChecked="True" GroupName="RadioGroup" Grid.Row="4"/>
         <RadioButton Name="radioButtonIHate" Content="I hate RadioButton" GroupName="RadioGroup" Grid.Row="5"/>
+        <ComboBox Name="simpleComboBox" Grid.Row="6">
+            <ComboBoxItem Content="Option 1" IsSelected="True"/>
+            <ComboBoxItem Content="Option 2"/>
+            <ComboBoxItem Content="Option 3"/>
+        </ComboBox>
+        <ComboBox Name="displayMemberPathComboBox" DisplayMemberPath="Name" Grid.Row="7"/>
+        <ComboBox Name="disabledComboBox" Grid.Row="8" IsEnabled="False">
+            <ComboBoxItem Content="Disabled ComboBox" IsSelected="True"/>
+        </ComboBox>
     </Grid>
     
 </UserControl>
