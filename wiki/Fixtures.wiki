@@ -3,27 +3,26 @@
 = Introduction =
 
 Silvernium Fixtures is an additional project built on top of core Silvernium that aims to provide fixtures (test supports) for easy interaction and assertion on Silverlight UI components. To see it in action, follow the steps above:
-
-* Download the latest version of the Silvernium solution from SVN
-* Start the Reference Application (ReferenceApplication project) from Visual Studio
-* Start the Selenium Server
-* Run the test in the FixturesTests project
+ * Download the latest version of the Silvernium solution from SVN
+ * Start the Reference Application (ReferenceApplication project) from Visual Studio
+ * Start the Selenium Server
+ * Run the test in the FixturesTests project
 
 = What it provides =
 
 At the present moment, you will find support for the following UI components:
 
-* CheckBox
-* ComboBox
-* RadioButton
-* TextBlock
-* TextBox
+ * CheckBox
+ * ComboBox
+ * RadioButton
+ * TextBlock
+ * TextBox
 
 Coming soon:
 
-* Grid
-* Pagination
-* Editable grids
+ * Grid
+ * Pagination
+ * Editable grids
 
 = How to use it with your Silverlight project =
 
