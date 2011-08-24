@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using Selenium;
 
 namespace DBServer.Selenium.Silvernium.Fixtures
@@ -9,7 +6,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
     public class SilverlightApplicationFixture
     {
         private const string ObjectId = "silverlight";
-        private const string Scriptkey = "MainPageFixture";
+        private const string Scriptkey = "SilverlightFixture";
 
         private readonly ISelenium _selenium;
         private readonly ThoughtWorks.Selenium.Silvernium.Silvernium _silvernium;
@@ -45,6 +42,11 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public RadioButtonFixture RadioButton(string path)
         {
             return new RadioButtonFixture(_silvernium, path);
+        }
+
+        public ComboBoxFixture ComboBox(string path)
+        {
+            return new ComboBoxFixture(_silvernium, path);
         }
 
     }
