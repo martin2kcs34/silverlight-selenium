@@ -14,9 +14,13 @@ Silvernium Fixtures is an additional project built on top of core Silvernium tha
 At the present moment, you will find support for the following UI components:
 
 - CheckBox
+
 - ComboBox
+
 - RadioButton
+
 - TextBlock
+
 - TextBox
 
 Coming soon:
