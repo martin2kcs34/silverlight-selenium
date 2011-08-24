@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckBoxFixtureTest.cs" />
+    <Compile Include="ComboBoxFixtureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadioButtonFixtureTest.cs" />
     <Compile Include="ReferenceApplicationFixture.cs" />
