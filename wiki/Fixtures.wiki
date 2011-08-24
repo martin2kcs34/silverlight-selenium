@@ -34,7 +34,7 @@ Coming soon:
 In order to make your project accessible to the components fixtures, you need to include both SilverlightFixture.xaml and WindowTracker.cs on it. These resources can be found on the ReferenceApplication project. For more information, please take a look at App.xaml.cs and ReferenceApplication.aspx, specially at the following lines:
 
 App.xaml.cs
-{{
+{{{
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (e.InitParams.ContainsKey("testMode") && Boolean.Parse(e.InitParams["testMode"]))
@@ -46,10 +46,10 @@ App.xaml.cs
                 this.RootVisual = new MainPage();
             }
         }
-}}
+}}}
 
 ReferenceApplication.aspx
-{{
+{{{
         <object id="silverlight" data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="100%" height="100%">
           <param name="InitParams" value="testMode=<%=Boolean.TrueString.Equals(Request.Params["testMode"], StringComparison.CurrentCultureIgnoreCase)%>" />
 		  <param name="source" value="ClientBin/ReferenceApplication.xap"/>
@@ -61,4 +61,4 @@ ReferenceApplication.aspx
  			  <img src="http://go.microsoft.com/fwlink/?LinkId=108181" alt="Get Microsoft Silverlight" style="border-style:none"/>
 		  </a>
 	    </object>
-}}
+}}}
