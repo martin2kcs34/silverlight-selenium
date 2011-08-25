@@ -8,7 +8,7 @@ Silvernium Fixtures is an additional project built on top of core Silvernium tha
  * Start the Selenium Server
  * Run the test in the FixturesTests project
 
-= What it provides =
+= What does it provides =
 
 At the present moment, you will find support for the following UI components:
 
