@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Silvernium Fixtures is an additional project built on top of core Silvernium that aims to provide fixtures (test supports) for easy interaction and assertion on Silverlight UI components. To see it in action, follow the steps above:
+Silvernium Fixtures is an additional project built on top of core Silvernium that aims to provide fixtures (test supports) for easy interaction and assertion on Silverlight UI components. To see it in action, follow the steps below:
  * Download the latest version of the Silvernium solution from SVN
  * Start the Reference Application (ReferenceApplication project) from Visual Studio
  * Start the Selenium Server
