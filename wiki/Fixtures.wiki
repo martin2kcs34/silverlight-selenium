@@ -17,6 +17,7 @@ At the present moment, you will find support for the following UI components:
  * RadioButton
  * TextBlock
  * TextBox
+ * Button
 
 Coming soon:
 
