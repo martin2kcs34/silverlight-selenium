@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DBServer.Selenium.Silvernium.ReferenceApplication
@@ -17,6 +19,11 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             };
             displayMemberPathComboBox.SelectedIndex = 0;
 
+        }
+
+        private void ClearButtonClick(object sender, RoutedEventArgs e)
+        {
+            clearTextBox.Text = "";
         }
     }
 
