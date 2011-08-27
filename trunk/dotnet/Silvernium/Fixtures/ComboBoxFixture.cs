@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq; 
 
 namespace DBServer.Selenium.Silvernium.Fixtures
 {
@@ -15,8 +16,8 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         public ComboBoxFixture RequireValue(string value)
         {
-            var actualValue = Call("GetValue", Path);
-            if (value != actualValue)
+            var actualValue = Call("GetValue", Path).Split('|');
+            if (!actualValue.Contains(value))
             {
                 throw new SilverniumFixtureException("Expected value wasn't selected '" 
                     + value + "' (actual: '" + actualValue + "')");

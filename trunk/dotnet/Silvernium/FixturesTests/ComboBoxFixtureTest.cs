@@ -12,6 +12,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         {
             App.ComboBox("simpleComboBox").RequireValue("Option 1");
             App.ComboBox("displayMemberPathComboBox").RequireValue("Arthur");
+            App.ComboBox("complexComboBox").RequireValue("Red");
             App.ComboBox("disabledComboBox").RequireValue("Disabled ComboBox");
         }
 
@@ -37,6 +38,13 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(SilverniumFixtureException))]
+        public void RequireValueThrowsExceptionForIncorrectValueInAComplexComboBox()
+        {
+            App.TextBox("complexComboBox").RequireText("This is not my value");
+        }
+
+        [TestMethod]
         public void SetValueChangesComboBoxValue()
         {
             App.ComboBox("simpleComboBox")
@@ -56,6 +64,15 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
                 .RequireValue("Richard")
                 .SetValue("Arthur")
                 .RequireValue("Arthur");
+
+            App.ComboBox("complexComboBox")
+                .RequireValue("Red")
+                .SetValue("Green")
+                .RequireValue("Green")
+                .SetValue("Blue")
+                .RequireValue("Blue")
+                .SetValue("Red")
+                .RequireValue("Red");
         }
 
         [TestMethod]

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Browser;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -70,7 +72,10 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             {
                 return (string) comboBoxItem.Content;
             }
-
+            if (item is DependencyObject)
+            {
+                return GetStringsFromPropertiesOfItselfAndChildren(item as DependencyObject, "");
+            }
             throw new SilverlightFixtureException("Could not retrieve combo box value");
         }
 
@@ -136,13 +141,53 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                     comboBox.SelectedItem = item;
                     return;
                 }
-                
+                else if (item is DependencyObject && HasStringInSomePropertyOfItselfOrChildren(item as DependencyObject, value))
+                {
+                    comboBox.SelectedItem = item;
+                    return;                  
+                }
+
                 //if (item.ContentTemplate != null && item.ContentTemplate.GetVisualChildren())
                 //{
                 //}
             }
 
             throw new SilverlightFixtureException("Value not found: " + value);
+        }
+
+        private bool HasStringInSomePropertyOfItselfOrChildren(DependencyObject node, string value)
+        {
+            foreach (var property in node.GetType().GetProperties())
+            {
+                if (property.CanRead && property.GetValue(node, null) as string == value)
+                {
+                    return true;
+                }
+            }
+            foreach (var child in node.GetVisualChildren())
+            {
+                if (HasStringInSomePropertyOfItselfOrChildren(child, value))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private string GetStringsFromPropertiesOfItselfAndChildren(DependencyObject node, string currentStrings)
+        {
+            foreach (var property in node.GetType().GetProperties())
+            {
+                if (property.CanRead)
+                {
+                    currentStrings += "|" + property.GetValue(node, null);
+                }
+            }
+            foreach (var child in node.GetVisualChildren())
+            {
+                currentStrings = GetStringsFromPropertiesOfItselfAndChildren(child, currentStrings);
+            }
+            return currentStrings;
         }
 
         public new string IsEnabled(String path)
@@ -156,7 +201,25 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             {
                 return (((ComboBox)component).IsEnabled).ToString();
             }
+            if (component is Button)
+            {
+                return (((Button) component).IsEnabled).ToString();
+            }
             throw new SilverlightFixtureException("Unsupported component type: " + component.GetType());
+        }
+
+        public void Click(String path)
+        {
+            var button = (Button)FindControl(path);
+            var peer = new ButtonAutomationPeer(button);
+            var ip = (IInvokeProvider)peer;
+            ip.Invoke();
+        }
+
+        public string GetProperty(String path, String propertyName)
+        {
+            var component = FindControl(path);
+            return component.GetType().GetProperty(propertyName).GetValue(component, null).ToString();
         }
 
         public DependencyObject FindControl(String path)

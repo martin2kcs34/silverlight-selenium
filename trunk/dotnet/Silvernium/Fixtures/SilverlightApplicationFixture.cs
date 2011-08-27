@@ -24,6 +24,11 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             }
         }
 
+        public ButtonFixture Button(string path)
+        {
+            return new ButtonFixture(_silvernium, path);
+        }
+
         public TextBoxFixture TextBox(string path)
         {
             return new TextBoxFixture(_silvernium, path);
