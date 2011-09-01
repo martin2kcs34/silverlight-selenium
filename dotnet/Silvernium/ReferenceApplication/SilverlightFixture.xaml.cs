@@ -222,6 +222,60 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return component.GetType().GetProperty(propertyName).GetValue(component, null).ToString();
         }
 
+        public string IsCellPresent(string path, string value)
+        {
+            var dataGrid = (DataGrid)FindControl(path);
+            if (dataGrid.ItemsSource != null)
+            {
+                foreach (var row in dataGrid.ItemsSource)
+                {
+                    foreach (var column in dataGrid.Columns)
+                    {
+                        var renderer = column.GetCellContent(row);
+                        if (renderer == null || renderer.GetType() != typeof (TextBlock)) continue;
+                        var tb = (TextBlock)renderer;
+                        if (value == tb.Text)
+                            return true.ToString();
+                    }
+                }
+            }
+            return false.ToString();
+        }
+
+        public string RowContaining(string path, string value)
+        {
+            var dataGrid = (DataGrid)FindControl(path);
+            if (dataGrid.ItemsSource != null)
+            {
+                var i = 0;
+                foreach (var row in dataGrid.ItemsSource)
+                {
+                    foreach (var column in dataGrid.Columns)
+                    {
+                        var renderer = column.GetCellContent(row);
+                        if (renderer == null || renderer.GetType() != typeof (TextBlock)) continue;
+                        var tb = (TextBlock)renderer;
+                        if (value == tb.Text)
+                            return i.ToString();
+                    }
+                    i++;
+                }
+            }
+            return "";
+        }
+
+        public string RowCount(string path)
+        {
+            var dataGrid = (DataGrid)FindControl(path);
+            return dataGrid.ItemsSource != null ? dataGrid.ItemsSource.Cast<object>().Count().ToString() : "0";
+        }
+
+        public void SelectRowByIndex(string path, string index)
+        {
+            var dataGrid = (DataGrid)FindControl(path);
+            dataGrid.SelectedIndex = int.Parse(index);
+        }
+
         public DependencyObject FindControl(String path)
         {
             var currentNode = WindowTracker.Instance().IsEmpty() ? this : (DependencyObject)WindowTracker.Instance().CurrentWindow();

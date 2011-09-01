@@ -54,6 +54,8 @@
     <Compile Include="ComponentFixture.cs" />
     <Compile Include="ComboBoxFixture.cs" />
     <Compile Include="ButtonFixture.cs" />
+    <Compile Include="DataGridFixture.cs" />
+    <Compile Include="DataRowFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadioButtonFixture.cs" />
     <Compile Include="SilverlightApplicationFixture.cs" />
