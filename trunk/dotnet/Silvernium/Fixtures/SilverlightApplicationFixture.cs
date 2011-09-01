@@ -54,5 +54,10 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             return new ComboBoxFixture(_silvernium, path);
         }
 
+        public DataGridFixture DataGrid(string path)
+        {
+            return new DataGridFixture(_silvernium, path);
+        }
+
     }
 }

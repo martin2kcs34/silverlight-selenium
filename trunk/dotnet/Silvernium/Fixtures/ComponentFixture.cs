@@ -9,7 +9,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
     public abstract class ComponentFixture
     {
-        protected const long Timeout = 30000;
+        protected const long Timeout = 5000;
         protected ThoughtWorks.Selenium.Silvernium.Silvernium Silvernium { get; set; }
         protected string Path { get; set; }
 

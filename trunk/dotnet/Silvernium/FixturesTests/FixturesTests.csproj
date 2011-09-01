@@ -43,6 +43,8 @@
     <Compile Include="CheckBoxFixtureTest.cs" />
     <Compile Include="ComboBoxFixtureTest.cs" />
     <Compile Include="ButtonFixtureTest.cs" />
+    <Compile Include="DataRowFixtureTest.cs" />
+    <Compile Include="DataGridFixtureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadioButtonFixtureTest.cs" />
     <Compile Include="ReferenceApplicationFixture.cs" />
