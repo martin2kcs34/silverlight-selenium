@@ -18,12 +18,14 @@ At the present moment, you will find support for the following UI components:
  * TextBlock
  * TextBox
  * Button
+ * DataGrid
 
 Coming soon:
 
- * Grid
- * Pagination
- * Editable grids
+ * Paged DataGrid
+ * Editable DataGrid
+
+ Need another fixture? Join our Google Group and let us know!
 
 = How to use it with your Silverlight project =
 
