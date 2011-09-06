@@ -225,6 +225,11 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
         public string IsCellPresent(string path, string value)
         {
             var dataGrid = (DataGrid)FindControl(path);
+            return IsCellPresent(dataGrid, value).ToString();
+        }
+
+        private bool IsCellPresent(DataGrid dataGrid, string value)
+        {
             if (dataGrid.ItemsSource != null)
             {
                 foreach (var row in dataGrid.ItemsSource)
@@ -232,14 +237,14 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                     foreach (var column in dataGrid.Columns)
                     {
                         var renderer = column.GetCellContent(row);
-                        if (renderer == null || renderer.GetType() != typeof (TextBlock)) continue;
+                        if (renderer == null || renderer.GetType() != typeof(TextBlock)) continue;
                         var tb = (TextBlock)renderer;
                         if (value == tb.Text)
-                            return true.ToString();
+                            return true;
                     }
                 }
             }
-            return false.ToString();
+            return false;
         }
 
         public string RowContaining(string path, string value)
@@ -274,6 +279,28 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
         {
             var dataGrid = (DataGrid)FindControl(path);
             dataGrid.SelectedIndex = int.Parse(index);
+        }
+
+        public string GoToPageContaining(string gridPath, string pagerPath, string value)
+        {
+            var grid = (DataGrid)FindControl(gridPath);
+            var pager = (DataPager)FindControl(pagerPath);
+
+            if (IsCellPresent(grid, value))
+            {
+                return pager.PageIndex.ToString();
+            }
+
+            for (var i = 0; i < pager.PageCount; i++)
+            {
+                pager.PageIndex = i;
+                if (IsCellPresent(grid, value))
+                {
+                    return pager.PageIndex.ToString();
+                }
+            }
+
+            return "";
         }
 
         public DependencyObject FindControl(String path)
