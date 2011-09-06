@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -86,6 +87,36 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         public void RequireRowCountThrowsExceptionForUnexpectedRowCount()
         {
             App.DataGrid("musiciansDataGrid").RequireRowCount(4);
+        }
+
+        [TestMethod]
+        public void GoToPageContainingGoesToTheRightPage()
+        {
+            var dataGrid = App.DataGrid("booksDataGrid", "booksDataPager");
+            dataGrid
+                .GoToPageContaining("The Unbearable Lightness of Being").RequireCellPresent("Milan Kundera")
+                .GoToPageContaining("The Lord of The Rings").RequireCellPresent("J.R.R. Tolkien")
+                .GoToPageContaining("O Tempo e o Vento").RequireCellPresent("Erico Verissimo")
+                .GoToPageContaining("Los Siete Locos").RequireCellPresent("Roberto Arlt")
+                .GoToPageContaining("La Invencion de Morel").RequireCellPresent("Adolfo Bioy Casares")
+                .GoToPageContaining("For Whom the Bell Tolls").RequireCellPresent("Ernest Hemingway")
+                .GoToPageContaining("Dom Casmurro").RequireCellPresent("Machado de Assis")
+                .GoToPageContaining("Cien Anos de Soledad").RequireCellPresent("Gabriel Garcia Marquez")
+                .GoToPageContaining("2001 - A Space Odissey").RequireCellPresent("Arthur C. Clarke");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SilverniumFixtureException))]
+        public void GoToPageContainingThrowsExceptionIfThereIsNoPageContaningTheExpectedValue()
+        {
+            App.DataGrid("booksDataGrid", "booksDataPager").GoToPageContaining("Paulo Coelho");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SilverniumFixtureException))]
+        public void GoToPageContainingThrowsExceptionIfTheDataGridHasNoDataPager()
+        {
+            App.DataGrid("musiciansDataGrid").GoToPageContaining("Drums");
         }
 
     }

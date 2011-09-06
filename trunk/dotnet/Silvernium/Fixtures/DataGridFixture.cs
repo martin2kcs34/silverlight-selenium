@@ -78,28 +78,28 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             return this;
         }
 
-        //public DataGridFixture GoToPageContaining(string value)
-        //{
-        //    if (PagerPath == null)
-        //        Assert.Fail("This is not a paged grid");
+        public DataGridFixture GoToPageContaining(string value)
+        {
+            if (PagerPath == null)
+                throw new SilverniumFixtureException("This is not a paged grid");
 
-        //    Wait(GridContainsAtLeastOneRowCondition());
-        //    Thread.Sleep(1000);
+            Wait(GridContainsAtLeastOneRowCondition());
+            Thread.Sleep(1000);
 
-        //    var page = Silvernium.Call("GoToPageContaining", Path, PagerPath, value);
-        //    if (page == string.Empty)
-        //        Assert.Fail("Could not find page containing value " + value);
-        //    return this;
-        //}
+            var page = Call("GoToPageContaining", Path, PagerPath, value);
+            if (page == string.Empty)
+                throw new SilverniumFixtureException("Could not find page containing value " + value);
+            return this;
+        }
 
-        //private Condition GridContainsAtLeastOneRowCondition()
-        //{
-        //    return delegate
-        //    {
-        //        var invocationResult = Silvernium.Call("Count", Path);
-        //        return !string.IsNullOrEmpty(invocationResult);
-        //    };
-        //}
+        private Condition GridContainsAtLeastOneRowCondition()
+        {
+            return delegate
+            {
+                var invocationResult = Call("RowCount", Path);
+                return !string.IsNullOrEmpty(invocationResult);
+            };
+        }
 
         private Condition CellPresentCondition(string value)
         {

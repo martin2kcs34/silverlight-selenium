@@ -59,5 +59,10 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             return new DataGridFixture(_silvernium, path);
         }
 
+        public DataGridFixture DataGrid(string path, string pagerPath)
+        {
+            return new DataGridFixture(_silvernium, path, pagerPath);
+        }
+
     }
 }
