@@ -1,5 +1,4 @@
 ﻿using System;
-using Selenium;
 
 namespace DBServer.Selenium.Silvernium.Fixtures
 {
@@ -8,21 +7,24 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public CheckBoxFixture(ThoughtWorks.Selenium.Silvernium.Silvernium silvernium, string path) 
             : base(silvernium, path) { }
 
+        public CheckBoxFixture(ThoughtWorks.Selenium.Silvernium.Silvernium silvernium, string gridPath, int rowIndex, string path)
+            : base(silvernium, gridPath, rowIndex, path) { }
+
         public CheckBoxFixture Uncheck()
         {
-            Call("SetValue", Path, Boolean.FalseString);
+            Call("SetValue", Boolean.FalseString);
             return this;
         }
 
         public CheckBoxFixture Check()
         {
-            Call("SetValue", Path, Boolean.TrueString);
+            Call("SetValue", Boolean.TrueString);
             return this;
         }
 
         public CheckBoxFixture RequireChecked()
         {
-            var value = Call("GetValue", Path);
+            var value = Call("GetValue");
             if (!Boolean.Parse(value))
             {
                 throw new SilverniumFixtureException("Checkbox was not checked");
@@ -32,7 +34,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         public CheckBoxFixture RequireUnchecked()
         {
-            var value = Call("GetValue", Path);
+            var value = Call("GetValue");
             if (Boolean.Parse(value))
             {
                 throw new SilverniumFixtureException("Checkbox was checked");

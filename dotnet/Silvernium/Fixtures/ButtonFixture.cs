@@ -7,15 +7,18 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public ButtonFixture(ThoughtWorks.Selenium.Silvernium.Silvernium silvernium, string path) 
             : base(silvernium, path) { }
 
+        public ButtonFixture(ThoughtWorks.Selenium.Silvernium.Silvernium silvernium, string gridPath, int rowIndex, string path)
+            : base(silvernium, gridPath, rowIndex, path) { }
+
         public ButtonFixture Click()
         {
-            Call("Click", Path);
+            Call("Click");
             return this;
         }
 
         public ButtonFixture RequireContent(string content)
         {
-            var actualContent = Call("GetProperty", Path, "Content");
+            var actualContent = Call("GetProperty", "Content");
             if (content != actualContent)
             {
                 throw new SilverniumFixtureException("Button does not contains expected content '" + content + "' "
@@ -26,7 +29,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         public ButtonFixture RequireEnabled()
         {
-            var enabled = Call("IsEnabled", Path);
+            var enabled = Call("IsEnabled");
             if (!Boolean.Parse(enabled))
             {
                 throw new SilverniumFixtureException("Button should be enabled");
@@ -36,7 +39,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         public ButtonFixture RequireDisabled()
         {
-            var enabled = Call("IsEnabled", Path);
+            var enabled = Call("IsEnabled");
             if (Boolean.Parse(enabled))
             {
                 throw new SilverniumFixtureException("Button should be disabled");

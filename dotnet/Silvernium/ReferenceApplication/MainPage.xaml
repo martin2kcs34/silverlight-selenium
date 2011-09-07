@@ -24,6 +24,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
             <TextBlock Name="textBlock" Text="This is a TextBlock" Grid.Row="0"/>
@@ -72,6 +73,49 @@
                 </data:DataGrid.Columns>
             </data:DataGrid>
             <data:DataPager x:Name="booksDataPager" DisplayMode="PreviousNextNumeric" PageSize="3" Grid.Row="16" />
+            <data:DataGrid x:Name="editableDataGrid" AutoGenerateColumns="False" Grid.Row="17">
+                <data:DataGrid.Columns>
+                    <data:DataGridTextColumn Header="Row" IsReadOnly="True" Binding="{Binding Label}"/>
+                    <data:DataGridTemplateColumn Header="Button" Width="80">
+                        <data:DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <Button Name="innerButton" Content="{Binding ButtonContent}" Click="InnerButtonClick" IsEnabled="{Binding Editable}" />
+                            </DataTemplate>
+                        </data:DataGridTemplateColumn.CellEditingTemplate>
+                    </data:DataGridTemplateColumn>
+                    <data:DataGridTemplateColumn Header="CheckBox" Width="80">
+                        <data:DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <CheckBox Name="innerCheckBox" IsChecked="{Binding Checked}" IsEnabled="{Binding Editable}" />
+                            </DataTemplate>
+                        </data:DataGridTemplateColumn.CellEditingTemplate>
+                    </data:DataGridTemplateColumn>
+                    <data:DataGridTemplateColumn Header="ComboBox" Width="80">
+                        <data:DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox Name="innerComboBox" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" IsEnabled="{Binding Editable}">
+                                    <ComboBoxItem Content="Option 1" />
+                                    <ComboBoxItem Content="Option 2" />
+                                </ComboBox>
+                            </DataTemplate>
+                        </data:DataGridTemplateColumn.CellEditingTemplate>
+                    </data:DataGridTemplateColumn>
+                    <data:DataGridTemplateColumn Header="TextBlock" Width="80">
+                        <data:DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBlock Name="innerTextBlock" Text="{Binding TextBlockText}" />
+                            </DataTemplate>
+                        </data:DataGridTemplateColumn.CellEditingTemplate>
+                    </data:DataGridTemplateColumn>
+                    <data:DataGridTemplateColumn Header="TextBox" Width="80">
+                        <data:DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBox Name="innerTextBox" Text="{Binding TextBoxText}" IsReadOnly="{Binding ReadOnly}" />
+                            </DataTemplate>
+                        </data:DataGridTemplateColumn.CellEditingTemplate>
+                    </data:DataGridTemplateColumn>
+                </data:DataGrid.Columns>
+            </data:DataGrid>
         </Grid>
 
     </ScrollViewer>
