@@ -27,7 +27,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         {
             var cellPresent = CellPresentCondition(value);
             Wait(cellPresent);
-            var rowIndex = Silvernium.Call("RowContaining", Path, value);
+            var rowIndex = Call("RowContaining", value);
             if (string.IsNullOrEmpty(rowIndex))
                 throw new SilverniumFixtureException("Unable to find row containing value " + value);
             return new DataRowFixture(Silvernium, Path, int.Parse(rowIndex));
@@ -57,7 +57,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         private int RowCount()
         {
-            return int.Parse(Call("RowCount", Path));
+            return int.Parse(Call("RowCount"));
         }
 
         public DataGridFixture RequireCellPresent(string value)
@@ -86,7 +86,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             Wait(GridContainsAtLeastOneRowCondition());
             Thread.Sleep(1000);
 
-            var page = Call("GoToPageContaining", Path, PagerPath, value);
+            var page = Call("GoToPageContaining", PagerPath, value);
             if (page == string.Empty)
                 throw new SilverniumFixtureException("Could not find page containing value " + value);
             return this;
@@ -96,7 +96,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         {
             return delegate
             {
-                var invocationResult = Call("RowCount", Path);
+                var invocationResult = Call("RowCount");
                 return !string.IsNullOrEmpty(invocationResult);
             };
         }
@@ -105,7 +105,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         {
             return delegate
             {
-                var result = Call("IsCellPresent", Path, value);
+                var result = Call("IsCellPresent", value);
                 return (result == true.ToString());
             };
         }

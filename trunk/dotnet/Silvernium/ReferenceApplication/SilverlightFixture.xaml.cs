@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -20,37 +21,43 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
 
         public string GetValue(string path)
         {
-            var component = FindControl(path);
-            return GetValue(component);
+            var control = FindControl(path);
+            return GetValue(control);
         }
 
-        private string GetValue(DependencyObject component)
+        public string GetValue(string gridPath, string rowIndex, string path)
         {
-            if (component is AutoCompleteBox)
+            var control = FindControl(gridPath, rowIndex, path);
+            return GetValue(control);
+        }
+
+        private string GetValue(DependencyObject control)
+        {
+            if (control is AutoCompleteBox)
             {
-                return ((AutoCompleteBox)component).Text;
+                return ((AutoCompleteBox)control).Text;
             }
-            if (component is TextBox)
+            if (control is TextBox)
             {
-                return ((TextBox)component).Text;
+                return ((TextBox)control).Text;
             }
-            if (component is TextBlock)
+            if (control is TextBlock)
             {
-                return ((TextBlock)component).Text;
+                return ((TextBlock)control).Text;
             }
-            if (component is CheckBox)
+            if (control is CheckBox)
             {
-                return ((CheckBox)component).IsChecked.ToString();
+                return ((CheckBox)control).IsChecked.ToString();
             }
-            if (component is RadioButton)
+            if (control is RadioButton)
             {
-                return ((RadioButton) component).IsChecked.ToString();
+                return ((RadioButton) control).IsChecked.ToString();
             }
-            if (component is ComboBox)
+            if (control is ComboBox)
             {
-                return GetValue(component as ComboBox);
+                return GetValue(control as ComboBox);
             }
-            throw new SilverlightFixtureException("Unsupported component type: " + component.GetType());
+            throw new SilverlightFixtureException("Unsupported control type: " + control.GetType());
         }
 
         private string GetValue(ComboBox comboBox)
@@ -82,6 +89,12 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
         public void SetValue(string path, string value)
         {
             var component = FindControl(path);
+            SetValue(component, value);
+        }
+
+        public void SetValue(string gridPath, string rowIndex, string path, string value)
+        {
+            var component = FindControl(gridPath, rowIndex, path);
             SetValue(component, value);
         }
 
@@ -190,36 +203,69 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return currentStrings;
         }
 
-        public new string IsEnabled(String path)
+        public new string IsEnabled(string path)
         {
-            var component = FindControl(path);
-            if (component is TextBox)
-            {
-                return (!((TextBox) component).IsReadOnly).ToString();
-            }
-            if (component is ComboBox)
-            {
-                return (((ComboBox)component).IsEnabled).ToString();
-            }
-            if (component is Button)
-            {
-                return (((Button) component).IsEnabled).ToString();
-            }
-            throw new SilverlightFixtureException("Unsupported component type: " + component.GetType());
+            var control = FindControl(path);
+            return IsEnabled(control).ToString();
         }
 
-        public void Click(String path)
+        public new string IsEnabled(string gridPath, string rowIndex, string path)
+        {
+            var control = FindControl(gridPath, rowIndex, path);
+            return IsEnabled(control).ToString();
+        }
+
+        private new bool IsEnabled(DependencyObject control)
+        {
+            if (control is TextBox)
+            {
+                return (!((TextBox) control).IsReadOnly);
+            }
+            if (control is ComboBox)
+            {
+                return (((ComboBox)control).IsEnabled);
+            }
+            if (control is Button)
+            {
+                return (((Button) control).IsEnabled);
+            }
+            throw new SilverlightFixtureException("Unsupported component type: " + control.GetType());
+        }
+
+        public void Click(string path)
         {
             var button = (Button)FindControl(path);
+            Click(button);
+        }
+
+        public void Click(string gridPath, string rowIndex, string path)
+        {
+            var button = (Button)FindControl(gridPath, rowIndex, path);
+            Click(button);
+        }
+
+        private void Click(Button button)
+        {
             var peer = new ButtonAutomationPeer(button);
             var ip = (IInvokeProvider)peer;
             ip.Invoke();
         }
 
-        public string GetProperty(String path, String propertyName)
+        public string GetProperty(string path, string propertyName)
         {
-            var component = FindControl(path);
-            return component.GetType().GetProperty(propertyName).GetValue(component, null).ToString();
+            var control = FindControl(path);
+            return GetProperty(control, propertyName).ToString();
+        }
+
+        public string GetProperty(string gridPath, string rowIndex, string path, string propertyName)
+        {
+            var control = FindControl(gridPath, rowIndex, path);
+            return GetProperty(control, propertyName).ToString();
+        }
+
+        private object GetProperty(DependencyObject control, string propertyName)
+        {
+            return control.GetType().GetProperty(propertyName).GetValue(control, null);
         }
 
         public string IsCellPresent(string path, string value)
@@ -303,7 +349,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return "";
         }
 
-        public DependencyObject FindControl(String path)
+        public DependencyObject FindControl(string path)
         {
             var currentNode = WindowTracker.Instance().IsEmpty() ? this : (DependencyObject)WindowTracker.Instance().CurrentWindow();
             foreach (var partialPath in path.Split('.'))
@@ -317,15 +363,22 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return currentNode;
         }
 
-        private DependencyObject FindControl(string id, DependencyObject currentParent)
+        public DependencyObject FindControl(string gridPath, string rowIndex, string path)
+        {
+            var dataGrid = (DataGrid)FindControl(gridPath);
+            var dataGridRow = FindDataGridRowByIndex(dataGrid, int.Parse(rowIndex));
+            return FindControl(path, dataGridRow);
+        }
+
+        private DependencyObject FindControl(string path, DependencyObject currentParent)
         {
             var currChildren = currentParent.GetVisualChildren();
             foreach (var item in currChildren)
             {
-                if (item.GetValue(NameProperty).ToString().Equals(id))
+                if (item.GetValue(NameProperty).ToString().Equals(path))
                     return item;
 
-                var childItem = FindControl(id, item);
+                var childItem = FindControl(path, item);
                 if (childItem != null)
                     return childItem;
             }
@@ -333,7 +386,31 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return null;
         }
 
-        public string Describe(String path)
+        private DataGridRow FindDataGridRowByIndex(DataGrid dataGrid, int index)
+        {
+            return (DataGridRow)FindChildrenByType(dataGrid, typeof(DataGridRow))[index];
+        }
+
+        private List<DependencyObject> FindChildrenByType(DependencyObject parent, Type type)
+        {
+            var children = new List<DependencyObject>();
+            FindChildrenByType(parent, type, children);
+            return children;
+        }
+
+        private void FindChildrenByType(DependencyObject parent, Type type, ICollection<DependencyObject> children)
+        {
+            if (parent.GetType() == type)
+            {
+                children.Add(parent);
+            }
+            foreach (var child in parent.GetVisualChildren())
+            {
+                FindChildrenByType(child, type, children);
+            }
+        }
+
+        public string Describe(string path)
         {
             return Describe(FindControl(path), "");
         }

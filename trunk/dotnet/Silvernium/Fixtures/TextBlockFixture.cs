@@ -5,9 +5,12 @@
         public TextBlockFixture(ThoughtWorks.Selenium.Silvernium.Silvernium silvernium, string path) 
             : base(silvernium, path) { }
 
+        public TextBlockFixture(ThoughtWorks.Selenium.Silvernium.Silvernium silvernium, string gridPath, int rowIndex, string path)
+            : base(silvernium, gridPath, rowIndex, path) { }
+
         public TextBlockFixture RequireText(string text)
         {
-            var actualText = Call("GetValue", Path);
+            var actualText = Call("GetValue");
             if (text != actualText)
             {
                 throw new SilverniumFixtureException("Text block doesn't contains expected text '"
@@ -18,7 +21,7 @@
 
         public TextBlockFixture RequireContains(string partialText)
         {
-            var fullText = Call("GetValue", Path);
+            var fullText = Call("GetValue");
             if (fullText == null || !fullText.Contains(partialText))
             {
                 throw new SilverniumFixtureException("Text block does not contains expected partial text " + partialText
@@ -29,7 +32,7 @@
 
         public TextBlockFixture RequireNotContains(string partialText)
         {
-            var fullText = Call("GetValue", Path);
+            var fullText = Call("GetValue");
             if (fullText != null && fullText.Contains(partialText))
             {
                 throw new SilverniumFixtureException("Text block contains unexpected partial text " + partialText

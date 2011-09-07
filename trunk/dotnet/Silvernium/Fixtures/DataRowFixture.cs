@@ -17,24 +17,9 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             Index = index;
         }
 
-        //public ComboBoxCellFixture ComboBoxCell(string name)
-        //{
-        //    return new ComboBoxCellFixture(Silvernium, Path, RowIndex, name);
-        //}
-
-        //public TextBoxCellFixture TextBoxCell(string name)
-        //{
-        //    return new TextBoxCellFixture(Silvernium, Path, RowIndex, name);
-        //}
-
-        //public CheckBoxCellFixture CheckBoxCell(string name)
-        //{
-        //    return new CheckBoxCellFixture(Silvernium, Path, RowIndex, name);
-        //}
-
         public DataRowFixture Select()
         {
-            Silvernium.Call("SelectRowByIndex", Path, Index.ToString());
+            Call("SelectRowByIndex", Index.ToString());
             return this;
         }
 
@@ -47,5 +32,29 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             return this;
         }
 
+        public ButtonFixture Button(string path)
+        {
+            return new ButtonFixture(Silvernium, Path, Index, path);
+        }
+
+        public CheckBoxFixture CheckBox(string path)
+        {
+            return new CheckBoxFixture(Silvernium, Path, Index, path);
+        }
+
+        public ComboBoxFixture ComboBox(string path)
+        {
+            return new ComboBoxFixture(Silvernium, Path, Index, path);
+        }
+
+        public TextBlockFixture TextBlock(string path)
+        {
+            return new TextBlockFixture(Silvernium, Path, Index, path);
+        }
+
+        public TextBoxFixture TextBox(string path)
+        {
+            return new TextBoxFixture(Silvernium, Path, Index, path);
+        }
     }
 }
