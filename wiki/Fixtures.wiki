@@ -1,4 +1,5 @@
 #summary Fixtures for easy interaction with common UI components.
+#labels Featured
 
 = Introduction =
 
@@ -10,7 +11,7 @@ Silvernium Fixtures is an additional project built on top of core Silvernium tha
 
 = What does it provides =
 
-At the present moment, you will find support for the following UI components:
+At the present moment, you will find support for the following UI controls:
 
  * CheckBox
  * ComboBox
@@ -19,13 +20,12 @@ At the present moment, you will find support for the following UI components:
  * TextBox
  * Button
  * DataGrid
-
-Coming soon:
-
  * Paged DataGrid
  * Editable DataGrid
 
- Need another fixture? Join our Google Group and let us know!
+= What's next? =
+
+If you need a fixture for another UI control, submit an issue or join our Google Group and let us know!
 
 = How to use it with your Silverlight project =
 
