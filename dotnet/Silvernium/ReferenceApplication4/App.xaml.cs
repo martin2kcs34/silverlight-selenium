@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace DBServer.Selenium.Silvernium.ReferenceApplication
 {
-    public partial class App
+    public partial class App : Application
     {
 
         public App()
@@ -31,6 +40,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
         {
 
         }
+
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             // If the app is running outside of the debugger then report the exception using
@@ -47,6 +57,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                 Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });
             }
         }
+
         private void ReportErrorToDOM(ApplicationUnhandledExceptionEventArgs e)
         {
             try
