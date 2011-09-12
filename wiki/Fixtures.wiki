@@ -9,6 +9,38 @@ Silvernium Fixtures is an additional project built on top of core Silvernium tha
  * Start the Selenium Server
  * Run the test in the FixturesTests project
 
+= A very simple example =
+
+The following code shows an example of how to interact with a TextBox contained in the reference application (source code included in the solution). Notice that this application has some support classes included (as described below) that allows the interaction from the fixtures.
+
+{{{
+using DBServer.Selenium.Silvernium.Fixtures;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace TestProject1
+{
+    [TestClass]
+    public class ReferenceApplicationSampleTest
+    {
+        private const string Host = "localhost";
+        private const int Port = 4444;
+        private const string BrowserString = "*firefox";
+        private const string Url = "http://silvernium.dbserver.com.br/ReferenceApplication.aspx?testMode=true";
+
+        [TestMethod]
+        public void DemonstrateTextBoxInteraction()
+        {
+            var referenceApp = new SilverlightApplicationFixture(Host, Port, BrowserString, Url);
+            referenceApp.TextBox("textBox")
+                .RequireEnabled()
+                .RequireText("This is a TextBox")
+                .SetText("This is still a TextBox, but we changed its value")
+                .RequireText("This is still a TextBox, but we changed its value");
+        }
+    }
+}
+}}}
+
 = What does it provides =
 
 At the present moment, you will find support for the following UI controls:
