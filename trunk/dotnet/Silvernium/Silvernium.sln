@@ -1,25 +1,25 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5C89BA3-2695-454B-97C4-852BB5EF851E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silvernium", "Silvernium\Silvernium.csproj", "{7BA20B30-4F17-4FBE-ABD2-6E608D54DBA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E6973493-647B-422C-8B87-87E0CA5961C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{5501E442-6C72-4052-907F-206EFF41B5C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceApplication", "ReferenceApplication\ReferenceApplication.csproj", "{54FA92BD-465E-4C12-82B2-E5B073C776CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceApplication3", "ReferenceApplication\ReferenceApplication3.csproj", "{54FA92BD-465E-4C12-82B2-E5B073C776CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceApplication.Web", "ReferenceApplication.Web\ReferenceApplication.Web.csproj", "{846D4688-07EF-4E71-B8BA-C92D6AECEBCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceApplication3.Web", "ReferenceApplication.Web\ReferenceApplication3.Web.csproj", "{846D4688-07EF-4E71-B8BA-C92D6AECEBCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixtures", "Fixtures\Fixtures.csproj", "{5F28F757-8CFF-4FB6-925F-748480DB77B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixturesTests", "FixturesTests\FixturesTests.csproj", "{CC41D4B6-9D41-444E-812E-3754FF0CE4BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5C89BA3-2695-454B-97C4-852BB5EF851E}"
-	ProjectSection(SolutionItems) = preProject
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
-		Silvernium.vsmdi = Silvernium.vsmdi
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceApplication4", "ReferenceApplication4\ReferenceApplication4.csproj", "{DC6CF654-4570-487A-A31A-1BE943F08666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceApplication4.Web", "ReferenceApplication4.Web\ReferenceApplication4.Web.csproj", "{6FD0D8AD-0FD0-4B76-A7D3-EEECB1209B37}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -58,6 +58,14 @@ Global
 		{CC41D4B6-9D41-444E-812E-3754FF0CE4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC41D4B6-9D41-444E-812E-3754FF0CE4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC41D4B6-9D41-444E-812E-3754FF0CE4BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6CF654-4570-487A-A31A-1BE943F08666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6CF654-4570-487A-A31A-1BE943F08666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6CF654-4570-487A-A31A-1BE943F08666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6CF654-4570-487A-A31A-1BE943F08666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD0D8AD-0FD0-4B76-A7D3-EEECB1209B37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD0D8AD-0FD0-4B76-A7D3-EEECB1209B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD0D8AD-0FD0-4B76-A7D3-EEECB1209B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD0D8AD-0FD0-4B76-A7D3-EEECB1209B37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
